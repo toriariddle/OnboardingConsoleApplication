@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,13 +12,32 @@ namespace OnboardingApp
         static void Main(string[] args)
         {
             Console.WriteLine("Hello and welcome to the Onboard Application!");
-            Console.WriteLine("What is your first name?");
-            var firstName = Console.ReadLine();
-            Console.WriteLine("Great, hello" + firstName + "!");
+            var firstName = AskQuestion("What is your first name?");
+            Console.WriteLine($"Great, hello {firstName}!");
 
-            Console.WriteLine("What is your last name?");
-            var lastName = Console.ReadLine();
-            Console.WriteLine("Great, hello" + lastName + "!");
+            var lastName = AskQuestion("What is your last name?");
+            Console.WriteLine($"Great, hello {firstName}{lastName}!");
+
+
+
+            Console.ReadLine();
+        }
+
+
+
+
+
+        /// <summary>
+        /// Ask question to the user via the console to get a response
+        /// </summary>
+        /// <param name="The question to ask the user"></param>
+        /// <returns>Response from the user</returns>
+
+
+        private static string AskQuestion(string question)
+        {
+            Console.WriteLine(question);
+            return Console.ReadLine();
         }
     }
 }
