@@ -20,8 +20,11 @@ namespace OnboardingApp
             Console.WriteLine($"Great, hello {User.FullName}!");
 
             User.IsAccountOwner = AskBoolQuestion("Are you the account owner?");
-            Console.WriteLine("Cool, good to know.");
-            Console.ReadLine();
+            Console.WriteLine($"Cool, good to know. {User.IsAccountOwner}");
+
+            User.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
+            Console.WriteLine($"Cool, your 4 digit pin is {User.PinNumber}");
+
 
         }
 
@@ -46,7 +49,7 @@ namespace OnboardingApp
 
         static bool AskBoolQuestion(string question)
         {
-            
+
             while (true)
             {
                 var response = AskQuestion(question + "| (y/n)");
@@ -55,8 +58,36 @@ namespace OnboardingApp
                     case "y": return true;
                     case "n": return false;
                 }
+
                 Console.WriteLine("Invalid entry. Please type y or n");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="question"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+
+        static int AskIntQuestion(string question, int length = 0)
+        {
+            var response = AskQuestion(question);
+
+            if (length > 0 && length != response.Length)
+            {
+                Console.WriteLine($"Invalid entry. Must be {length} digits.");
+                return AskIntQuestion(question, length);
+            }
+
+            int value = 0;
+            if (int.TryParse(response, out value))
+            {
+                return value;
+            }
+
+            Console.WriteLine($"Invalid entry. Must be numeric values.");
+            return AskIntQuestion(question, length);
         }
     }
 }
