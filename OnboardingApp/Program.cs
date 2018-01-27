@@ -38,17 +38,25 @@ namespace OnboardingApp
             return Console.ReadLine();
         }
 
+        /// <summary>
+        /// Ask true/false question to the user via console and get a response
+        /// </summary>
+        /// <param name="User is required to type y / n"></param>
+        /// <returns>y/n</returns>
+
         static bool AskBoolQuestion(string question)
         {
-            var response = AskQuestion(question + "| (y/n)");
-            if (response.ToLower() == "y") { return true; }
-            if (response.ToLower() == "n") { return false; }
-
-            Console.WriteLine("Invalid entry. Please type y or n");
-
-            return AskBoolQuestion(question);
-
-
+            
+            while (true)
+            {
+                var response = AskQuestion(question + "| (y/n)");
+                switch (response.ToLower())
+                {
+                    case "y": return true;
+                    case "n": return false;
+                }
+                Console.WriteLine("Invalid entry. Please type y or n");
+            }
         }
     }
 }
