@@ -24,16 +24,16 @@ namespace OnboardingApp
 
             User.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
             Console.WriteLine($"Cool, your 4 digit pin is {User.PinNumber}");
+            Console.WriteLine("Thank you and have a wonderful day!");
 
-
+            Console.ReadLine();
         }
 
         /// <summary>
         /// Ask question to the user via the console to get a response
         /// </summary>
-        /// <param name="The question to ask the user"></param>
+        /// <param name="question">The question to ask the user</param>
         /// <returns>Response from the user</returns>
-
 
         static string AskQuestion(string question)
         {
@@ -44,12 +44,11 @@ namespace OnboardingApp
         /// <summary>
         /// Ask true/false question to the user via console and get a response
         /// </summary>
-        /// <param name="User is required to type y / n"></param>
+        /// <param name="question">y / n</param>
         /// <returns>y/n</returns>
 
         static bool AskBoolQuestion(string question)
         {
-
             while (true)
             {
                 var response = AskQuestion(question + "| (y/n)");
@@ -58,36 +57,37 @@ namespace OnboardingApp
                     case "y": return true;
                     case "n": return false;
                 }
-
                 Console.WriteLine("Invalid entry. Please type y or n");
+                return response == "y";
             }
         }
 
         /// <summary>
-        /// 
+        ///  Ask user for pin number via console and get a response
         /// </summary>
-        /// <param name="question"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
+        /// <param name="question">What is your Pin Number</param>
+        /// <param name="length">Restrict to 4 digits</param>
+        /// <returns>4 Digit Numeric Pin Number </returns>
 
         static int AskIntQuestion(string question, int length = 0)
         {
-            var response = AskQuestion(question);
-
-            if (length > 0 && length != response.Length)
+            while (true)
             {
-                Console.WriteLine($"Invalid entry. Must be {length} digits.");
-                return AskIntQuestion(question, length);
-            }
+                var response = AskQuestion(question);
 
-            int value = 0;
-            if (int.TryParse(response, out value))
-            {
-                return value;
-            }
+                if (length > 0 && length != response.Length)
+                {
+                    Console.WriteLine($"Invalid entry. Must be {length} digits.");
+                    continue;
+                }
 
-            Console.WriteLine($"Invalid entry. Must be numeric values.");
-            return AskIntQuestion(question, length);
+                if (int.TryParse(response, out var value))
+                {
+                    return value;
+                }
+
+                Console.WriteLine($"Invalid entry. Must be numeric values.");
+            }
         }
     }
 }
