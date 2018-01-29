@@ -6,21 +6,21 @@ namespace OnboardingApp
     {
         static void Main(string[] args)
         {
-            var User = new User();
+            var user = new User();
             Console.WriteLine("Hello and welcome to the Onboarding Application!");
-            User.FirstName = AskQuestion("What is your first name?");
-            Console.WriteLine($"Hello {User.FirstName}!");
+            user.FirstName = AskQuestion("What is your first name?");
+            Console.WriteLine($"Hello {user.FirstName}!");
 
-            User.LastName = AskQuestion("What is your last name?");
-            Console.WriteLine($"Wonderful, hello {User.FullName}!");
+            user.LastName = AskQuestion("What is your last name?");
+            Console.WriteLine($"Wonderful, hello {user.FullName}!");
 
-            User.IsAccountOwner = AskBoolQuestion("Are you the account owner?");
-            Console.WriteLine($"Cool, that's good to know! {User.IsAccountOwner}");
+            user.IsAccountOwner = AskBoolQuestion("Are you the account owner?");
+            Console.WriteLine($"Cool, that's good to know! {user.IsAccountOwner}");
 
-            User.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
-            Console.WriteLine($"Your 4 digit pin is {User.PinNumber}");
+            user.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
+            Console.WriteLine($"Your 4 digit pin is {user.PinNumber}");
 
-            Console.WriteLine($"Excellent, thank you {User.FullName} for using the OnboardingApp!");
+            Console.WriteLine($"Excellent, thank you {user.FullName} for using the OnboardingApp!");
             Console.ReadLine();
         }
 
@@ -29,8 +29,6 @@ namespace OnboardingApp
         /// </summary>
         /// <param name="question">The question to ask the user</param>
         /// <returns>Response from the user</returns>
-
-
         static string AskQuestion(string question)
         {
             Console.WriteLine(question);
@@ -42,7 +40,6 @@ namespace OnboardingApp
         /// </summary>
         /// <param name="question">y / n</param>
         /// <returns>y/n</returns>
-
         static bool AskBoolQuestion(string question)
         {
             while (true)
@@ -50,10 +47,14 @@ namespace OnboardingApp
                 var response = AskQuestion(question + "| (y/n)");
 
                 if (response.ToLower() == "y")
+                {
                     return true;
+                }
 
                 if (response.ToLower() == "n")
-                    return false;
+                {
+                    return true;
+                }
 
                 if (response.ToLower() != "y")
                     Console.WriteLine("Invalid entry. Please type y or n");
@@ -66,7 +67,6 @@ namespace OnboardingApp
         /// <param name="question">What is your 4 digit pin number?</param>
         /// <param name="length">restrict to 4 digits</param>
         /// <returns>4 digit pin number</returns>
-
         static int AskIntQuestion(string question, int length = 0)
         {
             while (true)
