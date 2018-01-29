@@ -15,12 +15,12 @@ namespace OnboardingApp
             Console.WriteLine($"Wonderful, hello {User.FullName}!");
 
             User.IsAccountOwner = AskBoolQuestion("Are you the account owner?");
-            Console.WriteLine($"Alrighty then. {User.IsAccountOwner}");
+            Console.WriteLine($"Cool, that's good to know! {User.IsAccountOwner}");
 
-            User.PinNumber = AskIntQuestion("What is the 4 digit pin number?", 4);
-            Console.WriteLine($"The 4 digit pin is {User.PinNumber}");
+            User.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
+            Console.WriteLine($"Your 4 digit pin is {User.PinNumber}");
 
-            Console.WriteLine($"Excellent, thank you {User.FullName}. We are locating your account--please hold.");
+            Console.WriteLine($"Excellent, thank you {User.FullName} for using the OnboardingApp!");
             Console.ReadLine();
         }
 
