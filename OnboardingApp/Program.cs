@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnboardingApp
 {
@@ -12,20 +7,20 @@ namespace OnboardingApp
         static void Main(string[] args)
         {
             var User = new User();
-            Console.WriteLine("Hello and welcome to the Onboard Application!");
+            Console.WriteLine("Hello and welcome to the Onboarding Application!");
             User.FirstName = AskQuestion("What is your first name?");
-            Console.WriteLine($"Great, hello {User.FirstName}!");
+            Console.WriteLine($"Hello {User.FirstName}!");
 
             User.LastName = AskQuestion("What is your last name?");
-            Console.WriteLine($"Great, hello {User.FullName}!");
+            Console.WriteLine($"Wonderful, hello {User.FullName}!");
 
             User.IsAccountOwner = AskBoolQuestion("Are you the account owner?");
-            Console.WriteLine($"Cool, good to know. {User.IsAccountOwner}");
+            Console.WriteLine($"Alrighty then. {User.IsAccountOwner}");
 
-            User.PinNumber = AskIntQuestion("What is your 4 digit pin number?", 4);
-            Console.WriteLine($"Cool, your 4 digit pin is {User.PinNumber}");
-            Console.WriteLine("Thank you and have a wonderful day!");
+            User.PinNumber = AskIntQuestion("What is the 4 digit pin number?", 4);
+            Console.WriteLine($"The 4 digit pin is {User.PinNumber}");
 
+            Console.WriteLine($"Excellent, thank you {User.FullName}. We are locating your account--please hold.");
             Console.ReadLine();
         }
 
@@ -34,6 +29,7 @@ namespace OnboardingApp
         /// </summary>
         /// <param name="question">The question to ask the user</param>
         /// <returns>Response from the user</returns>
+
 
         static string AskQuestion(string question)
         {
@@ -52,22 +48,24 @@ namespace OnboardingApp
             while (true)
             {
                 var response = AskQuestion(question + "| (y/n)");
-                switch (response.ToLower())
-                {
-                    case "y": return true;
-                    case "n": return false;
-                }
-                Console.WriteLine("Invalid entry. Please type y or n");
-                return response == "y";
+
+                if (response.ToLower() == "y")
+                    return true;
+
+                if (response.ToLower() == "n")
+                    return false;
+
+                if (response.ToLower() != "y")
+                    Console.WriteLine("Invalid entry. Please type y or n");
             }
         }
 
         /// <summary>
-        ///  Ask user for pin number via console and get a response
+        /// ask for users pin number via console
         /// </summary>
-        /// <param name="question">What is your Pin Number</param>
-        /// <param name="length">Restrict to 4 digits</param>
-        /// <returns>4 Digit Numeric Pin Number </returns>
+        /// <param name="question">What is your 4 digit pin number?</param>
+        /// <param name="length">restrict to 4 digits</param>
+        /// <returns>4 digit pin number</returns>
 
         static int AskIntQuestion(string question, int length = 0)
         {
@@ -86,7 +84,7 @@ namespace OnboardingApp
                     return value;
                 }
 
-                Console.WriteLine($"Invalid entry. Must be numeric values.");
+                Console.WriteLine($"Invalid entry. Must be a numeric value.");
             }
         }
     }
